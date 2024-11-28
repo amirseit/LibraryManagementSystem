@@ -1,5 +1,5 @@
 import logging
-from library_management import add_book, delete_book, search_books, display_books, change_status
+from library_management import Library
 
 # --- Main Program Entry Point ---
 
@@ -15,6 +15,8 @@ if __name__ == "__main__":
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
+    library = Library()
+
     while True:
         print("\nLibrary Management System")
         print("1. Add Book")
@@ -27,15 +29,15 @@ if __name__ == "__main__":
         choice = input("Enter your choice (1-6): ").strip()
 
         if choice == "1":
-            add_book()
+            library.add_book()
         elif choice == "2":
-            delete_book()
+            library.delete_book()
         elif choice == "3":
-            search_books()
+            library.search_books()
         elif choice == "4":
-            display_books()
+            library.display_books()
         elif choice == "5":
-            change_status()
+            library.change_status()
         elif choice == "6":
             print("Exiting the Library Management System. Goodbye!")
             logging.shutdown()

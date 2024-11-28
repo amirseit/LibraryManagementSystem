@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "id": 1,
+        "title": "Amir's Book",
+        "author": "Amir",
+        "year": 2012,
+        "status": "available"
+    }
+]
