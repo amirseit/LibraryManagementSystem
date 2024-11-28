@@ -7,9 +7,6 @@ import helper_functions
 # File path for storing book data
 BOOKS_FILE = "books.json"
 
-# Set up logging configuration
-logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
-
 # --- File Operations ---
 
 def load_books() -> list[Book]:
