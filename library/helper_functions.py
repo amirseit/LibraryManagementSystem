@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from models import Book
+from library.models import Book
 
 def get_valid_id(books: list[Book]) -> int:
     """
@@ -11,6 +11,9 @@ def get_valid_id(books: list[Book]) -> int:
 
     Returns:
         int: A valid book ID.
+
+    Raises:
+        ValueError: If the user inputs a non-numerical value.
     """
     while True:
         try:
@@ -30,6 +33,9 @@ def get_valid_year() -> int:
 
     Returns:
         int: A valid year.
+
+    Raises:
+        ValueError: If the user inputs a non-numerical value.
     """
     current_year = datetime.now().year
     while True:

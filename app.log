@@ -20,3 +20,9 @@
 2024-11-28 19:52:19,933 - WARNING - Warning: books.json file not found. A new file will be created.
 2024-11-28 19:52:26,063 - INFO - Operation attempted, but the library is empty.
 2024-11-28 19:52:33,989 - WARNING - Empty input entered for a required field.
+2024-11-28 21:38:32,228 - WARNING - Invalid book ID entered: 2
+2024-11-28 21:38:34,094 - INFO - Operation attempted, but the library is empty.
+2024-11-28 21:38:36,818 - INFO - Operation attempted, but the library is empty.
+2024-11-28 21:46:17,025 - INFO - Operation attempted, but the library is empty.
+2024-11-28 21:47:14,028 - WARNING - Invalid year entered: 2100
+2024-11-28 21:47:35,407 - WARNING - Duplicate book entry attempted: Title='Amir's Book', Author='Amir', Year=2020

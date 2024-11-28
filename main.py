@@ -1,5 +1,5 @@
 import logging
-from library_management import Library
+from library.library_management import Library
 
 # --- Main Program Entry Point ---
 
@@ -15,8 +15,10 @@ if __name__ == "__main__":
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
+    # Create an instance of the Library class to manage library operations
     library = Library()
 
+    # Main program loop for user interaction
     while True:
         print("\nLibrary Management System")
         print("1. Add Book")

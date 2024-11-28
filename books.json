@@ -3,7 +3,28 @@
         "id": 1,
         "title": "Amir's Book",
         "author": "Amir",
-        "year": 2012,
+        "year": 2020,
+        "status": "available"
+    },
+    {
+        "id": 2,
+        "title": "Amir's Book",
+        "author": "Amir",
+        "year": 2021,
+        "status": "available"
+    },
+    {
+        "id": 3,
+        "title": "12",
+        "author": "Aru",
+        "year": 2000,
+        "status": "available"
+    },
+    {
+        "id": 4,
+        "title": "1",
+        "author": "1",
+        "year": 2000,
         "status": "available"
     }
 ]

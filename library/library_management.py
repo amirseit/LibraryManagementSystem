@@ -1,8 +1,8 @@
 import json
 import os
 import logging
-from models import Book
-import helper_functions
+from library.models import Book
+import library.helper_functions as helper_functions
 
 class Library:
     def __init__(self, books_file: str = "books.json"):
@@ -22,6 +22,10 @@ class Library:
 
         Returns:
             list[Book]: A list of Book objects.
+
+        Raises:
+            JSONDecodeError: If the JSON file is corrupted.
+            IOError: If there's an error reading the file.
         """
         if os.path.exists(self.books_file):
             try:
@@ -47,6 +51,10 @@ class Library:
     def save_books(self) -> None:
         """
         Save books to the JSON file.
+
+        Raises:
+            IOError: If there is an issue writing to the file.
+            Exception: For any other unexpected errors during the save operation.
         """
         try:
             with open(self.books_file, "w") as file:
@@ -64,11 +72,21 @@ class Library:
     def add_book(self) -> None:
         """
         Add a new book to the library.
+
+        Raises:
+            Exception: If an unexpected error occurs while adding the book.
         """
         try:
             title = helper_functions.get_non_empty_string("Enter book title: ")
             author = helper_functions.get_non_empty_string("Enter book author: ")
             year = helper_functions.get_valid_year()
+
+            # Check if the book already exists
+            for book in self.books:
+                if book.title.lower() == title.lower() and book.author.lower() == author.lower() and book.year == year:
+                    print(f"Error: A book with the same Title, Author, and Year already exists in the library.")
+                    logging.warning(f"Duplicate book entry attempted: Title='{title}', Author='{author}', Year={year}")
+                    return
 
             # Generate a unique ID
             book_id = 1 if not self.books else max(book.id for book in self.books) + 1
@@ -82,9 +100,13 @@ class Library:
             logging.error(f"Unexpected error while adding a book: {e}")
             print("An unexpected error occurred while adding the book.")
 
+
     def delete_book(self) -> None:
         """
         Delete a book from the library by ID.
+
+        Raises:
+            Exception: If an unexpected error occurs while deleting the book.
         """
         try:
             if helper_functions.is_library_empty(self.books):
@@ -102,6 +124,9 @@ class Library:
     def search_books(self) -> None:
         """
         Search for books by title, author, or year.
+
+        Raises:
+            Exception: If an unexpected error occurs during the search operation.
         """
         try:
             if helper_functions.is_library_empty(self.books):
@@ -136,6 +161,9 @@ class Library:
     def display_books(self) -> None:
         """
         Display all books in the library in a tabular format.
+
+        Raises:
+            Exception: If an unexpected error occurs while displaying the books.
         """
         try:
             if helper_functions.is_library_empty(self.books):
@@ -155,6 +183,9 @@ class Library:
     def change_status(self) -> None:
         """
         Change the status of a book by ID.
+
+        Raises:
+            Exception: If an unexpected error occurs while updating the book status.
         """
         try:
             if helper_functions.is_library_empty(self.books):
