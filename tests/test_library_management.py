@@ -99,7 +99,7 @@ class TestLibrary(unittest.TestCase):
         mock_print.assert_any_call(f"{1:<5} {'Книга 1':<30} {'Автор 1':<20} {2021:<6} {'доступна':<10}")
         mock_print.assert_any_call(f"{2:<5} {'Книга 2':<30} {'Автор 2':<20} {2022:<6} {'занята':<10}")
 
-    @patch("builtins.input", side_effect=["2", "Автор 1"])  # Mock search type and query
+    @patch("builtins.input", side_effect=["2", "Автор 1"])
     @patch("builtins.print")
     def test_search_books(self, mock_print, mock_input):
         """
