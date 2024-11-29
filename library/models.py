@@ -1,14 +1,14 @@
 class Book:
     def __init__(self, book_id: int, title: str, author: str, year: int, status: str = "available"):
         """
-        Initializes a Book instance.
+        Инициализирует экземпляр класса Book.
         
-        Args:
-            book_id (int): Unique identifier for the book.
-            title (str): Title of the book.
-            author (str): Author of the book.
-            year (int): Year of publication.
-            status (str): Status of the book ("available" or "borrowed"). Default is "available".
+        Аргументы:
+            book_id (int): Уникальный идентификатор книги.
+            title (str): Название книги.
+            author (str): Автор книги.
+            year (int): Год издания.
+            status (str): Статус книги ("available" или "borrowed"). По умолчанию "available".
         """
         self.id = book_id
         self.title = title
@@ -18,10 +18,10 @@ class Book:
 
     def to_dict(self) -> dict:
         """
-        Converts the Book instance into a dictionary.
+        Преобразует экземпляр Book в словарь.
 
-        Returns:
-            dict: A dictionary representation of the Book instance.
+        Возвращает:
+            dict: Представление экземпляра Book в виде словаря.
         """
         return {
             "id": self.id,
@@ -34,13 +34,13 @@ class Book:
     @staticmethod
     def from_dict(data: dict) -> 'Book':
         """
-        Creates a Book instance from a dictionary.
+        Создает экземпляр Book из словаря.
 
-        Args:
-            data (dict): A dictionary containing book data.
+        Аргументы:
+            data (dict): Словарь, содержащий данные о книге.
 
-        Returns:
-            Book: A Book instance created from the dictionary.
+        Возвращает:
+            Book: Экземпляр Book, созданный из словаря.
         """
         return Book(
             book_id=data["id"],
@@ -50,13 +50,13 @@ class Book:
             status=data["status"]
         )
 
-# Example Usage
+# Пример использования
 if __name__ == "__main__":
-    # Create a new book
+    # Создание новой книги
     book = Book(1, "1984", "George Orwell", 1949)
     print("Book as a dictionary:", book.to_dict())
 
-    # Serialize and deserialize using dictionaries
+    # Сериализация и десериализация с использованием словарей
     book_data = book.to_dict()
     recreated_book = Book.from_dict(book_data)
     print("Recreated Book:", recreated_book.to_dict())

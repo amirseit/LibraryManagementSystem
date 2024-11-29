@@ -1,34 +1,34 @@
 import logging
 from library.library_management import Library
 
-# --- Main Program Entry Point ---
+# --- Основная точка входа программы ---
 
 if __name__ == "__main__":
-    # Clear existing logging handlers
+    # Очистка существующих обработчиков логов
     for handler in logging.root.handlers[:]:
         logging.root.removeHandler(handler)
 
-    # Set up logging configuration
+    # Настройка конфигурации логирования
     logging.basicConfig(
         filename='app.log',
-        level=logging.INFO,  # Logs INFO and higher levels (WARNING, ERROR, etc.)
+        level=logging.INFO,  # Логирование для уровней INFO и выше (WARNING, ERROR и т.д.)
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
-    # Create an instance of the Library class to manage library operations
+    # Создание экземпляра класса Library для управления операциями библиотеки
     library = Library()
 
-    # Main program loop for user interaction
+    # Основной цикл программы для взаимодействия с пользователем
     while True:
-        print("\nLibrary Management System")
-        print("1. Add Book")
-        print("2. Delete Book")
-        print("3. Search for Books")
-        print("4. Display All Books")
-        print("5. Change Book Status")
-        print("6. Exit")
+        print("\nСистема управления библиотекой")
+        print("1. Добавить книгу")
+        print("2. Удалить книгу")
+        print("3. Поиск книг")
+        print("4. Отобразить все книги")
+        print("5. Изменить статус книги")
+        print("6. Выйти")
 
-        choice = input("Enter your choice (1-6): ").strip()
+        choice = input("Введите ваш выбор (1-6): ").strip()
 
         if choice == "1":
             library.add_book()
@@ -41,9 +41,9 @@ if __name__ == "__main__":
         elif choice == "5":
             library.change_status()
         elif choice == "6":
-            print("Exiting the Library Management System. Goodbye!")
+            print("Выход из системы управления библиотекой. До свидания!")
             logging.shutdown()
             break
         else:
-            print("Invalid choice. Please enter a number between 1 and 6.")
+            print("Неверный выбор. Пожалуйста, введите число от 1 до 6.")
             logging.warning(f"Invalid menu selection: '{choice}'")

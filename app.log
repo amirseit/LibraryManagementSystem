@@ -1,28 +1,3 @@
-2024-11-27 17:22:47,276 - WARNING - Invalid menu selection: '7'
-2024-11-27 17:22:57,956 - INFO - Operation attempted, but the library is empty.
-2024-11-27 17:23:11,660 - WARNING - Invalid book ID entered: 2
-2024-11-27 17:23:18,927 - INFO - Operation attempted, but the library is empty.
-2024-11-27 17:23:19,788 - INFO - Operation attempted, but the library is empty.
-2024-11-27 17:23:21,087 - INFO - Operation attempted, but the library is empty.
-2024-11-27 17:24:19,868 - WARNING - Invalid menu selection: '7'
-2024-11-28 19:00:12,991 - INFO - Operation attempted, but the library is empty.
-2024-11-28 19:30:47,655 - INFO - No books matched the search. Type='title', Query='asd'
-2024-11-28 19:30:47,655 - INFO - Search performed: Type='title', Query='asd', Results=0
-2024-11-28 19:30:52,600 - WARNING - Invalid search choice entered: 4
-2024-11-28 19:30:59,420 - INFO - No books matched the search. Type='title', Query='1'
-2024-11-28 19:30:59,420 - INFO - Search performed: Type='title', Query='1', Results=0
-2024-11-28 19:32:44,084 - WARNING - Invalid menu selection: '& c:/Users/Admins/Desktop/projects/libraryManagement/venv/Scripts/python.exe c:/Users/Admins/Desktop/projects/libraryManagement/main.py'
-2024-11-28 19:32:48,112 - WARNING - Empty input entered for a required field.
-2024-11-28 19:36:47,008 - WARNING - Invalid menu selection: '& c:/Users/Admins/Desktop/projects/libraryManagement/venv/Scripts/python.exe c:/Users/Admins/Desktop/projects/libraryManagement/library_management.py'
-2024-11-28 19:37:33,520 - WARNING - Empty input entered for a required field.
-2024-11-28 19:37:36,224 - INFO - No books matched the search. Type='title', Query='asd'
-2024-11-28 19:37:36,224 - INFO - Search performed: Type='title', Query='asd', Results=0
-2024-11-28 19:52:19,933 - WARNING - Warning: books.json file not found. A new file will be created.
-2024-11-28 19:52:26,063 - INFO - Operation attempted, but the library is empty.
-2024-11-28 19:52:33,989 - WARNING - Empty input entered for a required field.
-2024-11-28 21:38:32,228 - WARNING - Invalid book ID entered: 2
-2024-11-28 21:38:34,094 - INFO - Operation attempted, but the library is empty.
-2024-11-28 21:38:36,818 - INFO - Operation attempted, but the library is empty.
-2024-11-28 21:46:17,025 - INFO - Operation attempted, but the library is empty.
-2024-11-28 21:47:14,028 - WARNING - Invalid year entered: 2100
-2024-11-28 21:47:35,407 - WARNING - Duplicate book entry attempted: Title='Amir's Book', Author='Amir', Year=2020
+2024-11-29 13:31:28,329 - WARNING - Invalid book ID entered: 6
+2024-11-29 13:32:09,922 - WARNING - Non-numeric input entered for year.
+2024-11-29 13:32:26,178 - WARNING - Invalid book ID entered: 1

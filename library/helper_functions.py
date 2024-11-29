@@ -4,85 +4,85 @@ from library.models import Book
 
 def get_valid_id(books: list[Book]) -> int:
     """
-    Prompt the user for a valid book ID that exists in the library.
+    Запрашивает у пользователя действительный ID книги, который существует в библиотеке.
 
-    Args:
-        books (list[Book]): List of books in the library.
+    Аргументы:
+        books (list[Book]): Список книг в библиотеке.
 
-    Returns:
-        int: A valid book ID.
+    Возвращает:
+        int: Действительный ID книги.
 
-    Raises:
-        ValueError: If the user inputs a non-numerical value.
+    Исключения:
+        ValueError: Если пользователь вводит нечисловое значение.
     """
     while True:
         try:
-            book_id = int(input("Enter the ID of the book: "))
+            book_id = int(input("Введите ID книги: "))
             if any(book.id == book_id for book in books):
                 return book_id
             else:
-                print(f"No book found with ID {book_id}. Please try again.")
+                print(f"Книга с ID {book_id} не найдена. Пожалуйста, попробуйте снова.")
                 logging.warning(f"Invalid book ID entered: {book_id}")
         except ValueError:
-            print("Invalid input. Please enter a numeric ID.")
+            print("Неверный ввод. Пожалуйста, введите числовой ID.")
             logging.warning("Non-numeric input entered for book ID.")
 
 def get_valid_year() -> int:
     """
-    Prompt the user for a valid year of publication.
+    Запрашивает у пользователя действительный год публикации.
 
-    Returns:
-        int: A valid year.
+    Возвращает:
+        int: Действительный год.
 
-    Raises:
-        ValueError: If the user inputs a non-numerical value.
+    Исключения:
+        ValueError: Если пользователь вводит нечисловое значение.
     """
     current_year = datetime.now().year
     while True:
         try:
-            year = int(input("Enter year of publication: "))
+            year = int(input("Введите год публикации: "))
             if 0 < year <= current_year:
                 return year
             else:
-                print(f"Invalid year. Please enter a year between 1 and {current_year}.")
+                print(f"Недействительный год. Пожалуйста, введите год в диапазоне от 1 до {current_year}.")
                 logging.warning(f"Invalid year entered: {year}")
         except ValueError:
-            print("Invalid input. Please enter a numeric year.")
+            print("Неверный ввод. Пожалуйста, введите числовой год.")
             logging.warning("Non-numeric input entered for year.")
 
 def get_valid_status() -> str:
     """
-    Prompt the user to select a valid book status.
+    Запрашивает у пользователя выбор действительного статуса книги.
 
-    Returns:
-        str: A valid status ("available" or "borrowed").
+    Возвращает:
+        str: Действительный статус ("available" или "borrowed").
     """
     while True:
-        print("\nStatus Options:")
+        print("\nОпции статуса:")
         print("1. Available")
         print("2. Borrowed")
-        status_choice = input("Enter your choice (1 or 2): ").strip()
+        status_choice = input("Введите ваш выбор (1 или 2): ").strip()
         if status_choice == "1":
             return "available"
         elif status_choice == "2":
             return "borrowed"
         else:
-            print("Invalid choice. Please enter 1 or 2.")
+            print("Неверный выбор. Пожалуйста, введите 1 или 2.")
             logging.warning(f"Invalid status choice entered: {status_choice}")
 
 def get_search_choice() -> str:
     """
-    Prompt the user to select a valid search criterion.
+    Запрашивает у пользователя выбор действительного критерия поиска.
 
-    Returns:
-        str: The search type ("title", "author", or "year").
+    Возвращает:
+        str: Тип поиска ("title", "author" или "year").
     """
     while True:
-        print("\nSearch Options:")
+        print("\nОпции поиска:")
         print("1. Title")
         print("2. Author")
         print("3. Year")
-        search_choice = input("Enter your choice (1-3): ").strip()
+        search_choice = input("Введите ваш выбор (1-3): ").strip()
         if search_choice == "1":
             return "title"
         elif search_choice == "2":
@@ -90,38 +90,38 @@ def get_search_choice() -> str:
         elif search_choice == "3":
             return "year"
         else:
-            print("Invalid choice. Please enter a number between 1 and 3.")
+            print("Неверный выбор. Пожалуйста, введите число от 1 до 3.")
             logging.warning(f"Invalid search choice entered: {search_choice}")
 
 def get_non_empty_string(prompt: str) -> str:
     """
-    Prompt the user for a non-empty string.
+    Запрашивает у пользователя непустой string.
 
-    Args:
-        prompt (str): The prompt to display to the user.
+    Аргументы:
+        prompt (str): Сообщение для отображения пользователю.
 
-    Returns:
-        str: A non-empty string.
+    Возвращает:
+        str: Непустой string.
     """
     while True:
         value = input(prompt).strip()
         if value:
             return value
         else:
-            print("Input cannot be empty. Please try again.")
+            print("Ввод не может быть пустым. Пожалуйста, попробуйте снова.")
             logging.warning("Empty input entered for a required field.")
 
 def filter_books(books: list[Book], search_type: str, search_query: str) -> list[Book]:
     """
-    Filter books based on the search type and query.
+    Фильтровать книги на основе типа поиска и запроса.
 
-    Args:
-        books (list[Book]): List of books to search.
-        search_type (str): The field to search by ("title", "author", or "year").
-        search_query (str): The search query string.
+    Аргументы:
+        books (list[Book]): Список книг для поиска.
+        search_type (str): Поле для поиска ("title", "author" или "year").
+        search_query (str): Строка поиска.
 
-    Returns:
-        list[Book]: List of books that match the search criteria.
+    Возвращает:
+        list[Book]: Список книг, соответствующих критериям поиска.
     """
     filtered_books = [
         book for book in books
@@ -135,16 +135,16 @@ def filter_books(books: list[Book], search_type: str, search_query: str) -> list
 
 def is_library_empty(books: list[Book]) -> bool:
     """
-    Check if the library is empty and log a message if it is.
+     Проверьте, пуста ли библиотека, и выведите сообщение, если это так.
 
-    Args:
-        books (list[Book]): List of books in the library.
+    Аргументы:
+        books (list[Book]): Список книг в библиотеке.
 
-    Returns:
-        bool: True if the library is empty, False otherwise.
+    Возвращает:
+        bool: True, если библиотека пуста, иначе False.
     """
     if not books:
-        print("No books in the library.")
+        print("В библиотеке нет книг.")
         logging.info("Operation attempted, but the library is empty.")
         return True
     return False

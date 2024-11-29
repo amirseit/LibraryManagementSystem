@@ -7,25 +7,25 @@ import library.helper_functions as helper_functions
 class Library:
     def __init__(self, books_file: str = "books.json"):
         """
-        Initialize the Library instance.
+        Инициализировать экземпляр библиотеки.
 
-        Args:
-            books_file (str): Path to the file where books data is stored.
+        Аргументы:
+            books_file (str): Путь к файлу, где хранятся данные о книгах.
         """
         self.books_file = books_file
         self.books = self.load_books()
 
-    # --- File Operations ---
+    # --- Операции с файлами ---
     def load_books(self) -> list[Book]:
         """
-        Load books from the JSON file.
+        Загружает книги из JSON-файла.
 
-        Returns:
-            list[Book]: A list of Book objects.
+        Возвращает:
+            list[Book]: Список объектов Book.
 
-        Raises:
-            JSONDecodeError: If the JSON file is corrupted.
-            IOError: If there's an error reading the file.
+        Исключения:
+            JSONDecodeError: Если JSON-файл поврежден.
+            IOError: Если произошла ошибка при чтении файла.
         """
         if os.path.exists(self.books_file):
             try:
@@ -36,7 +36,7 @@ class Library:
                 error_message = "Error: books.json is corrupted. Starting with an empty library."
                 print(error_message)
                 logging.error(error_message)
-                return []  # Empty list if file is corrupted
+                return []
             except Exception as e:
                 error_message = f"Unexpected error while loading books: {e}"
                 print(error_message)
@@ -50,11 +50,11 @@ class Library:
 
     def save_books(self) -> None:
         """
-        Save books to the JSON file.
+        Сохраняет книги в JSON-файл.
 
-        Raises:
-            IOError: If there is an issue writing to the file.
-            Exception: For any other unexpected errors during the save operation.
+        Исключения:
+            IOError: Если возникла проблема при записи в файл.
+            Exception: Любая другая неожиданная ошибка при сохранении.
         """
         try:
             with open(self.books_file, "w") as file:
@@ -68,45 +68,45 @@ class Library:
             print(error_message)
             logging.error(error_message)
 
-    # --- Core Operations ---
+    # --- Основные операции ---
     def add_book(self) -> None:
         """
-        Add a new book to the library.
+        Добавляет новую книгу в библиотеку.
 
-        Raises:
-            Exception: If an unexpected error occurs while adding the book.
+        Исключения:
+            Exception: Если произошла неожиданная ошибка при добавлении книги.
         """
         try:
-            title = helper_functions.get_non_empty_string("Enter book title: ")
-            author = helper_functions.get_non_empty_string("Enter book author: ")
+            title = helper_functions.get_non_empty_string("Введите название книги: ")
+            author = helper_functions.get_non_empty_string("Введите автора книги: ")
             year = helper_functions.get_valid_year()
 
-            # Check if the book already exists
+            # Проверка на существование книги
             for book in self.books:
                 if book.title.lower() == title.lower() and book.author.lower() == author.lower() and book.year == year:
-                    print(f"Error: A book with the same Title, Author, and Year already exists in the library.")
+                    print(f"Ошибка: Книга с таким названием, автором и годом уже существует в библиотеке.")
                     logging.warning(f"Duplicate book entry attempted: Title='{title}', Author='{author}', Year={year}")
                     return
 
-            # Generate a unique ID
+            # Генерация уникального ID
             book_id = 1 if not self.books else max(book.id for book in self.books) + 1
 
-            # Create and add the book
+            # Создание и добавление книги
             new_book = Book(book_id, title, author, year)
             self.books.append(new_book)
             self.save_books()
-            print(f"Book '{title}' added successfully!")
+            print(f"Книга '{title}' успешно добавлена!")
         except Exception as e:
             logging.error(f"Unexpected error while adding a book: {e}")
-            print("An unexpected error occurred while adding the book.")
+            print("Произошла неожиданная ошибка при добавлении книги.")
 
 
     def delete_book(self) -> None:
         """
-        Delete a book from the library by ID.
+        Удаляет книгу из библиотеки по ID.
 
-        Raises:
-            Exception: If an unexpected error occurs while deleting the book.
+        Исключения:
+            Exception: Если произошла неожиданная ошибка при удалении книги.
         """
         try:
             if helper_functions.is_library_empty(self.books):
@@ -116,76 +116,76 @@ class Library:
             book_to_delete = next(book for book in self.books if book.id == book_id)
             self.books.remove(book_to_delete)
             self.save_books()
-            print(f"Book ID {book_id} deleted successfully.")
+            print(f"Книга с ID {book_id} успешно удалена.")
         except Exception as e:
             logging.error(f"Unexpected error while deleting a book: {e}")
-            print("An unexpected error occurred while deleting the book.")
+            print("Произошла неожиданная ошибка при удалении книги.")
 
     def search_books(self) -> None:
         """
-        Search for books by title, author, or year.
+        Ищет книги по названию, автору или году.
 
-        Raises:
-            Exception: If an unexpected error occurs during the search operation.
+        Исключения:
+            Exception: Если произошла неожиданная ошибка во время операции поиска.
         """
         try:
             if helper_functions.is_library_empty(self.books):
                 return
 
-            # Get the search type
+            # Получить тип поиска
             search_type = helper_functions.get_search_choice()
             
-            # Use get_non_empty_string to ensure a valid search query
-            search_query = helper_functions.get_non_empty_string(f"Enter {search_type}: ").lower()
+            # Используйте get_non_empty_string для проверки корректности строки поиска
+            search_query = helper_functions.get_non_empty_string(f"Введите {search_type}: ").lower()
 
-            # Filter books based on the search criteria
+            # Отфильтруйте книги по критериям поиска
             matching_books = helper_functions.filter_books(self.books, search_type, search_query)
 
             if matching_books:
-                print(f"\nFound {len(matching_books)} book(s):")
+                print(f"\nНайдено {len(matching_books)} книг(и):")
                 
-                # Print table header for search results
-                print(f"{'ID':<5} {'Title':<30} {'Author':<20} {'Year':<6} {'Status':<10}")
+                # Вывод заголовка таблицы для результатов поиска
+                print(f"{'ID':<5} {'Название':<30} {'Автор':<20} {'Год':<6} {'Статус':<10}")
                 print("-" * 75)
                 
-                # Print each matching book's details
+                # Вывод данных о каждой найденной книге
                 for book in matching_books:
                     print(f"{book.id:<5} {book.title:<30} {book.author:<20} {book.year:<6} {book.status:<10}")
             else:
-                print("\nNo matching books found.")
+                print("\nСовпадений не найдено.")
                 logging.info(f"Search performed: Type='{search_type}', Query='{search_query}', Results=0")
         except Exception as e:
             logging.error(f"Unexpected error while searching for books: {e}")
-            print("An unexpected error occurred while searching for books.")
+            print("Произошла неожиданная ошибка при поиске книг.")
 
     def display_books(self) -> None:
         """
-        Display all books in the library in a tabular format.
+        Отображает все книги в библиотеке в табличном формате.
 
-        Raises:
-            Exception: If an unexpected error occurs while displaying the books.
+        Исключения:
+            Exception: Если произошла неожиданная ошибка при отображении книг.
         """
         try:
             if helper_functions.is_library_empty(self.books):
                 return
 
-            # Print table header
-            print(f"{'ID':<5} {'Title':<30} {'Author':<20} {'Year':<6} {'Status':<10}")
+            # Вывод заголовка таблицы
+            print(f"{'ID':<5} {'Название':<30} {'Автор':<20} {'Год':<6} {'Статус':<10}")
             print("-" * 75)
 
-            # Print each book's details
+            # Вывод данных о каждой найденной книге
             for book in self.books:
                 print(f"{book.id:<5} {book.title:<30} {book.author:<20} {book.year:<6} {book.status:<10}")
         except Exception as e:
             logging.error(f"Unexpected error while displaying books: {e}")
-            print("An unexpected error occurred while displaying the books.")
+            print("Произошла неожиданная ошибка при отображении книг.")
 
     def change_status(self) -> None:
         """
-        Change the status of a book by ID.
+        Изменяет статус книги по ID.
 
-        Raises:
-            Exception: If an unexpected error occurs while updating the book status.
+        Исключения:
+            Exception: Если произошла неожиданная ошибка при обновлении статуса книги.
         """
         try:
             if helper_functions.is_library_empty(self.books):
@@ -196,13 +196,13 @@ class Library:
             new_status = helper_functions.get_valid_status()
 
             if book_to_update.status == new_status:
-                print(f"The book is already '{new_status}'.")
+                print(f"Книга уже имеет статус '{new_status}'.")
                 logging.info(f"Status update skipped for Book ID={book_id}. Already '{new_status}'.")
                 return
 
             book_to_update.status = new_status
             self.save_books()
-            print(f"Book ID {book_id} status updated to '{new_status}'.")
+            print(f"Статус книги с ID {book_id} обновлен на '{new_status}'.")
         except Exception as e:
             logging.error(f"Unexpected error while updating book status: {e}")
-            print("An unexpected error occurred while updating the book status.")
+            print("Произошла неожиданная ошибка при обновлении статуса книги.")

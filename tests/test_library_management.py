@@ -88,34 +88,35 @@ class TestLibrary(unittest.TestCase):
         Test displaying books in the library.
         """
         self.library.books = [
-            Book(book_id=1, title="Book 1", author="Author 1", year=2021, status="available"),
-            Book(book_id=2, title="Book 2", author="Author 2", year=2022, status="borrowed"),
+            Book(book_id=1, title="Книга 1", author="Автор 1", year=2021, status="доступна"),
+            Book(book_id=2, title="Книга 2", author="Автор 2", year=2022, status="занята"),
         ]
         self.library.display_books()
 
         # Verify table header and rows are printed correctly
-        mock_print.assert_any_call(f"{'ID':<5} {'Title':<30} {'Author':<20} {'Year':<6} {'Status':<10}")
+        mock_print.assert_any_call(f"{'ID':<5} {'Название':<30} {'Автор':<20} {'Год':<6} {'Статус':<10}")
         mock_print.assert_any_call("-" * 75)
-        mock_print.assert_any_call(f"{1:<5} {'Book 1':<30} {'Author 1':<20} {2021:<6} {'available':<10}")
-        mock_print.assert_any_call(f"{2:<5} {'Book 2':<30} {'Author 2':<20} {2022:<6} {'borrowed':<10}")
+        mock_print.assert_any_call(f"{1:<5} {'Книга 1':<30} {'Автор 1':<20} {2021:<6} {'доступна':<10}")
+        mock_print.assert_any_call(f"{2:<5} {'Книга 2':<30} {'Автор 2':<20} {2022:<6} {'занята':<10}")
 
-    @patch("builtins.input", side_effect=["2", "Author 1"])  # Mock search type and query
+    @patch("builtins.input", side_effect=["2", "Автор 1"])  # Mock search type and query
     @patch("builtins.print")
     def test_search_books(self, mock_print, mock_input):
         """
         Test searching for books by author.
         """
         self.library.books = [
-            Book(book_id=1, title="Book 1", author="Author 1", year=2021, status="available"),
-            Book(book_id=2, title="Book 2", author="Author 2", year=2022, status="borrowed"),
+            Book(book_id=1, title="Книга 1", author="Автор 1", year=2021, status="доступна"),
+            Book(book_id=2, title="Книга 2", author="Автор 2", year=2022, status="занята"),
         ]
         self.library.search_books()
 
         # Verify the printed output
-        mock_print.assert_any_call("\nFound 1 book(s):")
-        mock_print.assert_any_call(f"{'ID':<5} {'Title':<30} {'Author':<20} {'Year':<6} {'Status':<10}")
+        mock_print.assert_any_call("\nНайдено 1 книг(и):")
+        mock_print.assert_any_call(f"{'ID':<5} {'Название':<30} {'Автор':<20} {'Год':<6} {'Статус':<10}")
         mock_print.assert_any_call("-" * 75)
-        mock_print.assert_any_call(f"{1:<5} {'Book 1':<30} {'Author 1':<20} {2021:<6} {'available':<10}")
+        mock_print.assert_any_call(f"{1:<5} {'Книга 1':<30} {'Автор 1':<20} {2021:<6} {'доступна':<10}")
+
 
     @patch("builtins.print")
     def test_is_library_empty(self, mock_print):
@@ -124,9 +125,7 @@ class TestLibrary(unittest.TestCase):
         """
         self.library.books = []
         self.library.display_books()
-        mock_print.assert_any_call("No books in the library.")
-
-
+        mock_print.assert_any_call("В библиотеке нет книг.")
 
 if __name__ == "__main__":
     unittest.main()
